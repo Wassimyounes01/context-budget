@@ -1,6 +1,6 @@
-# BALLAST — Architecture
+# Context Budget — Architecture
 
-BALLAST keeps a long-running LLM agent from capsizing under its own context. Register the signals that predict pressure — memory-file size, log line-counts, session age, task count, anything — each with comfortable/stressed/critical thresholds and a weight. BALLAST blends them into a single 0–1 pressure score and picks a load mode: FULL, COMPRESSED, or EMERGENCY. Pair it with a token budget (a cheap chars-based estimate or your own tokenizer) to decide how much history to keep, when to summarize, and when to hard-trim. Pure Node, zero dependencies, never throws — a small keel for agents that run for hours.
+Context Budget keeps a long-running LLM agent from capsizing under its own context. Register the signals that predict pressure — memory-file size, log line-counts, session age, task count, anything — each with comfortable/stressed/critical thresholds and a weight. Context Budget blends them into a single 0–1 pressure score and picks a load mode: FULL, COMPRESSED, or EMERGENCY. Pair it with a token budget (a cheap chars-based estimate or your own tokenizer) to decide how much history to keep, when to summarize, and when to hard-trim. Pure Node, zero dependencies, never throws — a small keel for agents that run for hours.
 
 ## Flow
 
@@ -23,7 +23,7 @@ flowchart LR
 
 ## How it fits together
 
-BALLAST is a pure library — no disk, no network. `normalize(value, {comfortable, stressed, critical})` maps a raw signal onto 0–1 with two linear segments (0→0.5 across comfortable→stressed, 0.5→1 across stressed→critical, clamped). A `Meter` holds registered signals `{ name, weight, value, comfortable, stressed, critical }` where `value` is a number or a lazy function (a throw contributes 0, never crashes the reading); `pressure()` returns the weight-normalized blend of every signal's normalized value, `report()` returns the per-signal breakdown, and `mode()` maps the pressure onto FULL / COMPRESSED / EMERGENCY using configurable cutoffs (default 0.4 / 0.7). `estimateTokens(text)` is a fast chars/4 heuristic you can replace with a real tokenizer; a `Budget(total)` tracks `spend()` / `remaining()` / `over()` against a ceiling and exposes `fraction()` for feeding back into a signal. Nothing here is bound to a particular app — you register the signals and thresholds that predict pressure in your agent, and BALLAST turns them into a mode decision and a token ledger.
+Context Budget is a pure library — no disk, no network. `normalize(value, {comfortable, stressed, critical})` maps a raw signal onto 0–1 with two linear segments (0→0.5 across comfortable→stressed, 0.5→1 across stressed→critical, clamped). A `Meter` holds registered signals `{ name, weight, value, comfortable, stressed, critical }` where `value` is a number or a lazy function (a throw contributes 0, never crashes the reading); `pressure()` returns the weight-normalized blend of every signal's normalized value, `report()` returns the per-signal breakdown, and `mode()` maps the pressure onto FULL / COMPRESSED / EMERGENCY using configurable cutoffs (default 0.4 / 0.7). `estimateTokens(text)` is a fast chars/4 heuristic you can replace with a real tokenizer; a `Budget(total)` tracks `spend()` / `remaining()` / `over()` against a ceiling and exposes `fraction()` for feeding back into a signal. Nothing here is bound to a particular app — you register the signals and thresholds that predict pressure in your agent, and Context Budget turns them into a mode decision and a token ledger.
 
 ## Extending it
 

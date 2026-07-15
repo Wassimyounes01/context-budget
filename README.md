@@ -1,14 +1,14 @@
-<!-- BALLAST — white-label. No personal or company identifiers in this file by design. -->
+<!-- Context Budget — white-label. No personal or company identifiers in this file by design. -->
 
 <p align="center">
-  <img src="assets/hero.svg" alt="BALLAST" width="100%">
+  <img src="assets/hero.svg" alt="Context Budget" width="100%">
 </p>
 
-<h1 align="center">⚓ BALLAST</h1>
+<h1 align="center">⚓ Context Budget</h1>
 
 <p align="center">
   <b>Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.</b><br>
-  <sub>BALLAST keeps a long-running LLM agent from capsizing under its own context. Register the signals that predict pressure — memory-file size, log line-counts, session age, task count, anything — each with comfortable/stressed/critical thresholds and a weight. BALLAST blends them into a single 0–1 pressure score and picks a load mode: FULL, COMPRESSED, or EMERGENCY. Pair it with a token budget (a cheap chars-based estimate or your own tokenizer) to decide how much history to keep, when to summarize, and when to hard-trim. Pure Node, zero dependencies, never throws — a small keel for agents that run for hours.</sub>
+  <sub>Context Budget keeps a long-running LLM agent from capsizing under its own context. Register the signals that predict pressure — memory-file size, log line-counts, session age, task count, anything — each with comfortable/stressed/critical thresholds and a weight. Context Budget blends them into a single 0–1 pressure score and picks a load mode: FULL, COMPRESSED, or EMERGENCY. Pair it with a token budget (a cheap chars-based estimate or your own tokenizer) to decide how much history to keep, when to summarize, and when to hard-trim. Pure Node, zero dependencies, never throws — a small keel for agents that run for hours.</sub>
 </p>
 
 <p align="center">
@@ -23,9 +23,9 @@
 
 ---
 
-## Why BALLAST
+## Why Context Budget
 
-Agents that run for hours accumulate memory, logs, and history until a request silently exceeds the context window and everything degrades at once. BALLAST makes that pressure observable and actionable. You register signals — each a current value plus comfortable/stressed/critical thresholds and a weight — and BALLAST normalizes and blends them into one pressure score, then maps it to a mode: FULL loads everything, COMPRESSED loads the essentials, EMERGENCY loads the bare minimum and flags for compaction. A token budget rounds it out: estimate the cost of any text (chars/4 by default, or plug in your real tokenizer) and track spend against a ceiling. The result is graceful degradation you control, not a cliff you hit — decide what to shed while there's still room to decide.
+Agents that run for hours accumulate memory, logs, and history until a request silently exceeds the context window and everything degrades at once. Context Budget makes that pressure observable and actionable. You register signals — each a current value plus comfortable/stressed/critical thresholds and a weight — and Context Budget normalizes and blends them into one pressure score, then maps it to a mode: FULL loads everything, COMPRESSED loads the essentials, EMERGENCY loads the bare minimum and flags for compaction. A token budget rounds it out: estimate the cost of any text (chars/4 by default, or plug in your real tokenizer) and track spend against a ceiling. The result is graceful degradation you control, not a cliff you hit — decide what to shed while there's still room to decide.
 
 ---
 
@@ -67,7 +67,7 @@ flowchart LR
 node examples/demo.cjs        # build a meter, print pressure + mode + budget
 
 # 2. in your code
-#   const { Meter, Budget, estimateTokens } = require('./lib/ballast.cjs');
+#   const { Meter, Budget, estimateTokens } = require('./lib/context-budget.cjs');
 #   const m = new Meter();
 #   m.add({ name: 'memory', weight: 0.5, value: () => require('fs').statSync('mem.json').size,
 #           comfortable: 50e3, stressed: 200e3, critical: 500e3 });
@@ -76,19 +76,19 @@ node examples/demo.cjs        # build a meter, print pressure + mode + budget
 #   const b = new Budget(120000); b.spend(estimateTokens(history)); b.remaining();
 ```
 
-> BALLAST holds no state on disk and makes no network calls — it reads the signals you give it and returns numbers. Signal values may be plain numbers or lazy functions; a function that throws contributes 0 rather than crashing the reading. Everything is pure and fail-open.
+> Context Budget holds no state on disk and makes no network calls — it reads the signals you give it and returns numbers. Signal values may be plain numbers or lazy functions; a function that throws contributes 0 rather than crashing the reading. Everything is pure and fail-open.
 
 ---
 
 ## Repository layout
 
 ```
-ballast/
+context-budget/
 ├── lib/
-│   └── ballast.cjs          ← the pressure Meter, load modes, and token Budget
+│   └── context-budget.cjs          ← the pressure Meter, load modes, and token Budget
 ├── examples/
 │   └── demo.cjs             ← register a few signals, print pressure / mode / budget
-└── (no persisted state — BALLAST is pure)
+└── (no persisted state — Context Budget is pure)
 ```
 
 ---
@@ -102,4 +102,4 @@ ballast/
 
 ---
 
-<p align="center"><sub>BALLAST · measure · mode · budget · MIT</sub></p>
+<p align="center"><sub>Context Budget · measure · mode · budget · MIT</sub></p>

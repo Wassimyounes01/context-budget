@@ -1,12 +1,12 @@
 {
-  "name": "ballast",
+  "name": "context-budget",
   "version": "1.0.0",
   "description": "Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.",
   "license": "MIT",
   "type": "commonjs",
   "scripts": {
     "test": "node examples/demo.cjs >/dev/null && echo ok",
-    "check": "node --check lib/ballast.cjs && node --check examples/demo.cjs && echo ok"
+    "check": "node --check lib/context-budget.cjs && node --check examples/demo.cjs && echo ok"
   },
   "keywords": [
     "context-window",

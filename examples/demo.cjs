@@ -1,7 +1,7 @@
 'use strict';
 // demo.cjs — register a few signals, watch pressure climb through the load modes, and budget tokens.
 // Run: node examples/demo.cjs
-const { Meter, Budget, estimateTokens } = require('../lib/ballast.cjs');
+const { Meter, Budget, estimateTokens } = require('../lib/context-budget.cjs');
 
 // A meter with three weighted signals. Here the values are inline numbers; in a real agent they'd
 // be lazy functions reading file sizes, log counts, or a session-start timestamp.

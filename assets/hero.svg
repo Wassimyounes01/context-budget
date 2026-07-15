@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" role="img" aria-label="BALLAST — Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" role="img" aria-label="Context Budget — Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.">
   <defs>
     <style>
       :root { color-scheme: light dark; }
@@ -29,7 +29,7 @@
   <text class="accent" x="98" y="108" font-family="ui-monospace,monospace" font-size="15" letter-spacing="6" font-weight="600">CONTEXT PRESSURE + TOKEN BUDGET</text>
 
   <!-- title -->
-  <text class="title" x="96" y="188" font-size="76">⚓ BALLAST</text>
+  <text class="title" x="96" y="188" font-size="76">⚓ Context Budget</text>
 
   <!-- tagline -->
   <text class="tag" x="98" y="232" font-size="22">Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.</text>

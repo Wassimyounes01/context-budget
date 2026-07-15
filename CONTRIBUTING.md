@@ -1,6 +1,6 @@
-# Contributing to BALLAST
+# Contributing to Context Budget
 
-Thanks for your interest! BALLAST is MIT-licensed and built to be forked, extended, and
+Thanks for your interest! Context Budget is MIT-licensed and built to be forked, extended, and
 dropped into your own stack.
 
 ## Ground rules

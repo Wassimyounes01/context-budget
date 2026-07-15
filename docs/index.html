@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BALLAST — Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.</title>
+<title>Context Budget — Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.</title>
 <style>
   :root{
     --ink:#0A0D12; --panel:#11151d; --panel-2:#151b25; --line:#1e2733;
@@ -65,7 +65,7 @@
 </head>
 <body>
 <header class="bar"><div class="wrap">
-  <div class="mark"><span class="dot"></span>BALLAST</div>
+  <div class="mark"><span class="dot"></span>Context Budget</div>
   <button id="themeToggle" aria-label="Toggle color theme">◐ theme</button>
 </div></header>
 
@@ -73,7 +73,7 @@
   <div class="eyebrow">CONTEXT PRESSURE + TOKEN BUDGET</div>
   <h1>Know how full<br><span class="under">before you overflow.</span></h1>
   <p class="lede">Measure how full your agent's context is getting from weighted signals, pick a load mode, and budget tokens — so long sessions degrade gracefully instead of blowing up.</p>
-  <p class="sub">BALLAST keeps a long-running LLM agent from capsizing under its own context. Register the signals that predict pressure — memory-file size, log line-counts, session age, task count, anything — each with comfortable/stressed/critical thresholds and a weight. BALLAST blends them into a single 0–1 pressure score and picks a load mode: FULL, COMPRESSED, or EMERGENCY. Pair it with a token budget (a cheap chars-based estimate or your own tokenizer) to decide how much history to keep, when to summarize, and when to hard-trim. Pure Node, zero dependencies, never throws — a small keel for agents that run for hours.</p>
+  <p class="sub">Context Budget keeps a long-running LLM agent from capsizing under its own context. Register the signals that predict pressure — memory-file size, log line-counts, session age, task count, anything — each with comfortable/stressed/critical thresholds and a weight. Context Budget blends them into a single 0–1 pressure score and picks a load mode: FULL, COMPRESSED, or EMERGENCY. Pair it with a token budget (a cheap chars-based estimate or your own tokenizer) to decide how much history to keep, when to summarize, and when to hard-trim. Pure Node, zero dependencies, never throws — a small keel for agents that run for hours.</p>
   <div class="cta">
     <a class="btn primary" href="#start">▸ Quickstart</a>
     <a class="btn" href="#">View on GitHub</a>
@@ -88,8 +88,8 @@
 
 <section><div class="wrap">
   <div class="shead"><div class="eyebrow">what it does</div><h2>A pressure gauge for context.</h2></div>
-  <div class="cards"><div class="card"><div class="n">01 / MEASURE</div><h3>Blend the signals that matter</h3><p>Register any signal — a memory file's size, a log's line-count, minutes since session start, tasks completed — with comfortable/stressed/critical thresholds and a weight. BALLAST normalizes each to 0–1 and blends them into one pressure score. Values can be numbers or lazy functions; missing files read as zero, never a throw.</p></div>
-    <div class="card"><div class="n">02 / MODE</div><h3>Degrade on purpose</h3><p>Pressure maps to a mode: FULL (load everything), COMPRESSED (essentials only), EMERGENCY (bare minimum + flag for compaction). Cutoffs are yours to set. Ask BALLAST for the mode at the top of a turn and load memory accordingly — a smooth ramp-down instead of a hard overflow.</p></div>
+  <div class="cards"><div class="card"><div class="n">01 / MEASURE</div><h3>Blend the signals that matter</h3><p>Register any signal — a memory file's size, a log's line-count, minutes since session start, tasks completed — with comfortable/stressed/critical thresholds and a weight. Context Budget normalizes each to 0–1 and blends them into one pressure score. Values can be numbers or lazy functions; missing files read as zero, never a throw.</p></div>
+    <div class="card"><div class="n">02 / MODE</div><h3>Degrade on purpose</h3><p>Pressure maps to a mode: FULL (load everything), COMPRESSED (essentials only), EMERGENCY (bare minimum + flag for compaction). Cutoffs are yours to set. Ask Context Budget for the mode at the top of a turn and load memory accordingly — a smooth ramp-down instead of a hard overflow.</p></div>
     <div class="card"><div class="n">03 / BUDGET</div><h3>Count the tokens</h3><p>Estimate any text's token cost with a fast chars-based heuristic, or plug in your model's real tokenizer. Track spend against a ceiling, ask what's remaining, and decide what to keep or summarize before you run out — the budget is a hard number, not a guess.</p></div></div>
 </div></section>
 
@@ -100,7 +100,7 @@
 node examples/demo.cjs        # build a meter, print pressure + mode + budget
 
 <span class="c"># 2. in your code</span>
-<span class="c">#   const { Meter, Budget, estimateTokens } = require('./lib/ballast.cjs');</span>
+<span class="c">#   const { Meter, Budget, estimateTokens } = require('./lib/context-budget.cjs');</span>
 <span class="c">#   const m = new Meter();</span>
 <span class="c">#   m.add({ name: 'memory', weight: 0.5, value: () =&gt; require('fs').statSync('mem.json').size,</span>
 <span class="c">#           comfortable: 50e3, stressed: 200e3, critical: 500e3 });</span>
@@ -110,7 +110,7 @@ node examples/demo.cjs        # build a meter, print pressure + mode + budget
 </div></div></section>
 
 <footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:12px">
-  <span>BALLAST · measure · mode · budget</span><span>MIT · bring your own keys · $0 to run</span>
+  <span>Context Budget · measure · mode · budget</span><span>MIT · bring your own keys · $0 to run</span>
 </div></footer>
 
 <script>
